@@ -1,0 +1,27 @@
+{% extends "dashboard.html"%}
+{% block content %}
+{% load crispy_forms_tags %}
+ {% load staticfiles %}
+<link href="{% static 'brajesh/css/datetimepicker.css' %}" rel="stylesheet" />
+<script src="{% static 'brajesh/js/bootstrap-datetimepicker.js' %}"></script>   
+    
+	<body>	
+	<div class="container-fluid" class="responsive" style="height: auto; width: auto; background-color: DarkCyan">
+<h2 style="color:white"><center><b>"EDIT OF YOUR DONATION SERVICE"<b></center></h2><br><br><hr/>
+<div class="container-fluid" style="height:130%; width: auto; color:DarkCyan; background-color: PaleTurquoise">
+<u><h3>Chnage will permanatly store on Donated Service</h3></u><br>
+    	
+    <form method="POST" class="post-form">{% csrf_token %}
+	{{ form|crispy }}
+
+
+		<br>
+        <button type="submit" class="btn btn-info btn-lg" style="margin-left:30%" >Update Service</button>
+		
+		</div>
+    </form>
+	</div></div>
+</body>
+{% endblock %}
+		
+    
