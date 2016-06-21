@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^history/$', 'products.views.post_history', name='post_history'),
     url(r'^history/add/(?P<pk>[0-9]+)/$', 'products.views.post_detail_history', name='post_detail_history'),
     url(r'^historyS/$', 'products.views.service_history', name='service_history'),
+    url(r'^historyS1/$', 'products.views.service_history1', name='service_history1'),
+    url(r'^historyS2/$', 'products.views.service_history2', name='service_history2'),
     url(r'^servicelist/$', 'products.views.servicelist', name='servicelist'),
     
     url(r'^history/service/(?P<pk>[0-9]+)/$', 'products.views.service_detail_history', name='service_detail_history'),
@@ -42,6 +44,7 @@ urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')), 
     url(r'^tour/$', 'ecommerce2.views.tour', name='tour'),
     url(r'^dashboard/', include('dashboard.urls')),
+    url(r'^chat/', include('djangoChat.urls')),
    
 ]
 

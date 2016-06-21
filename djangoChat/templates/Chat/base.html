@@ -1,0 +1,188 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- BOOTSTRAP STYLES-->
+	<link href="{% static 'fotter/css/main.css' %}" rel="stylesheet">
+     <!-- FONTAWESOME STYLES-->
+
+        <!-- CUSTOM STYLES-->
+    <link href="{% static 'assets/css/custom.css' %}" rel="stylesheet" />   
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/bootstrap.min.css'  %}" type="text/css" />
+<link href="{% static 'css/bootstrap-theme.css' %}" type="text/css" />
+<link href="{% static 'css/bootstrap-theme.min.css' %}" type="text/css" />
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet" />
+	<!-- BOOTSTRAP STYLES-->
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="{% static 'assets/css/font-awesome.css' %}" rel="stylesheet" />
+<script src="{% static 'js/jquery-1.8.3.min.js' %}"></script>
+<script src="{% static 'js/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+    
+    <link rel="stylesheet" type="text/css" href="/static/djangoChat/css/normalize.css" />
+    <link href="/static/djangoChat/css/main.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript"> 
+      
+      jsonData = {{data}};
+    </script>
+   <script data-main="/static/djangoChat/dist/scripts/main" type="text/javascript" src="/static/djangoChat/dist/scripts/vendor/requirejs/require.js"></script>
+  <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Custom Fonts -->
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<style>
+.navbar-default{
+background:white;
+}
+.modal-footer{
+background:LightSteelBlue;
+}
+  .navbar-collapse
+ {
+        padding-top: 1%;
+        padding-left: auto;}
+</style>  
+  </head>
+  
+<div class="navbar-default navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<h1><a href="{% url 'home' %}"><b>ECHARITY</b></a></h1>
+</div>
+<div class="navbar-collapse ">
+<ul class="nav navbar-nav navbar-right">
+<!-- Trigger the modal with a button -->
+ <form class="navbar-form navbar-left" method="GET" role="search" action='{% url "products" %}'>
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Search" name='q'>
+</div>
+               <!-- <input type="submit" class="btn btn-default">Submit</button> -->
+            </form>&nbsp;&nbsp;&nbsp;
+
+ <li role="presentation" ><a href="{% url 'home' %}"><b>HOME</b></a></li>&nbsp;
+{% if request.user.is_authenticated %}
+
+<a href="{% url 'auth_logout' %}" type="button" class="btn btn-info btn-lg">Logout</a>
+{% else %}
+<button type="button"  class="btn btn-info btn-lg" data-toggle="modal" id='rim' data-target="#login">LOGIN HERE</button>
+ {% endif %}
+</ul>
+</div>
+</div>
+    </div>
+ <div class="modal fade" id="login" role="dialog">
+<div class="modal-dialog modal-sm">
+      <div class="modal-content">
+         <div class="modal-footer">
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">LOGIN HERE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+        </div>
+        <div class="modal-body">
+<b>Already REGISTER Click Here <b>
+<a href="{% url 'auth_login' %}"> <img src='{% static "img/snap/01sig.png" %}' /> </a><hr>
+<b>First Time User Click Here <b>     
+ <a href="{% url 'registration_register' %}"> <img src='{% static "img/snap/0001user" %}' /> </a>
+                </div>
+<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+       
+      </div>
+    </div>
+    </div>
+	 <br> <br> <br> 
+    <div id="wrapper" style="background-color:#bb7788">
+   <nav class="navbar-default navbar-side" role="navigation" style="background-color:DarkCyan">
+            <div class="sidebar-collapse" >
+                <ul class="nav" id="main-menu" >
+
+				<li class="text-center">
+                         
+                        
+             {% if document %}
+                                
+ {% for document in document %}
+                                <img src="{{ document.docfile.url }}" class="img-circle"  id="circle" alt="{% static 'assets/img/find_user.png' %}" width="160px" height="150px"/>
+                      {% endfor %}
+          
+                        {% else %}
+                       <img id="blah" src="{% static 'assets/img/find_user.png' %}" class="img-circle"  width="160px" height="150px" alt="your selected item"/>
+								
+                {% endif %}
+                                           
+	</li>	{% for document in document %}
+ <li><b><center> {{document.firstname}}&nbsp;{{ document.lastname}}</center></b>
+                   </li>{% endfor %}				
+			 <li>
+                     <a href="{% url 'messages_inbox' %} "><i class="fa fa-qrcode fa-3x"></i> MESSAGE</a>
+                    </li>		
+                    <li>
+                        <a href="{% url 'list' %}"><i class="fa fa-dashboard fa-3x"></i> DONATE ITEM</a>
+                    </li>
+		<li>
+                        <a href="/products/service/ "><i class="fa fa-square fa-3x"></i> GIVE SERVICE'S</a>
+                    </li>
+
+ 			<li>
+                        <a href="{% url 'devent' %} "><i class="fa fa-bar-chart-o fa-3x"></i>POST EVNTS</a>
+                    </li>
+			<li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> HISTORY<span class="fa arrow"></span></a>
+                        <ul class="nav nav-default">
+                            <li>
+                                <a href="{% url 'post_history' %} "><i class="fa fa-laptop fa-3x"></i>Product History</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'service_history' %}"><i class="fa fa-bolt fa-3x"></i>Service's History</a>
+                            </li>
+                              <li>
+                                 <a href="{% url 'devent_detail' %}"><i class="fa fa-bar-chart-o fa-3x"></i>Event History</a>
+                             </li>
+                        </ul>
+                      </li> 
+			<li>
+                        <a href="{% url 'profiles' %} "><i class="fa fa-table fa-3x"></i> PROFILE</a>
+                    </li>	
+                      <li>
+			<a href="{% url 'edit' %} "><i class="fa fa-square-o fa-3x"></i>EDIT PROFILE</a>
+                    </li>
+                  <li>
+                        <a href="/chat/ "><i class="fa fa-laptop fa-3x"></i> CHATTING</a>
+                    </li>
+                </ul>
+               
+            </div> 
+            
+        </nav>  
+        <!-- /. NAV SIDE  -->
+                   
+                 <!-- /. ROW  -->
+     
+  </div>  
+{% block body %}
+  
+    {% endblock body %}
+    </div>  
+
+
+
+  
+</html>

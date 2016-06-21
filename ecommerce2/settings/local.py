@@ -62,9 +62,11 @@ INSTALLED_APPS = (
     'newsletter',
     'products',   
     'django_messages',
+    'messagegroups',
     'filer',
     'dashing',
     'dashboard',
+    'djangoChat',
   
 )
 

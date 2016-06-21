@@ -151,7 +151,7 @@ def post_edit(request, pk):
 @login_required
 def post_history(request):
     model = Product, User
-    posts = Product.objects.filter(user_id = request.user.id)
+    posts = Product.objects.filter(user_id = request.user.id)[:5]
     document = Document.objects.filter(user_id = request.user.id)[:1]
     return render(request, 'products/post_list.html', {'posts': posts, 'document': document})
 
@@ -287,9 +287,26 @@ def service_detail(request, pk):
 @login_required
 def service_history(request):
     model = Service, User
-    posts = Service.objects.filter(user_id = request.user.id)
+    posts = Service.objects.filter(user_id = request.user.id)[:5]
+    #posts1 = Service.objects.filter(user_id = request.user.id)[5:10]
     document = Document.objects.filter(user_id = request.user.id)[:1]
     return render(request, 'products/service_list.html', {'posts': posts, 'document': document})
+ 
+@login_required
+def service_history1(request):
+    model = Service, User
+    #posts = Service.objects.filter(user_id = request.user.id)[:5]
+    posts1 = Service.objects.filter(user_id = request.user.id)[5:10]
+    document = Document.objects.filter(user_id = request.user.id)[:1]
+    return render(request, 'products/service_list1.html', {'posts1': posts1, 'document': document})
+  
+@login_required
+def service_history2(request):
+    model = Service, User
+    #posts = Service.objects.filter(user_id = request.user.id)[:5]
+    posts2 = Service.objects.filter(user_id = request.user.id)[10:15]
+    document = Document.objects.filter(user_id = request.user.id)[:1]
+    return render(request, 'products/service_list2.html', {'posts2': posts2, 'document': document})
     
 def servicelist(request):
     model = Service
